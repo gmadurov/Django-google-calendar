@@ -1,0 +1,97 @@
+{% extends "admin/base_site.html" %} {% block content %}
+<div id="content" class="">
+  <h1>Delete Event</h1>
+
+  <div id="content-main">
+    <div class="module" id="changelist">
+      <div class="changelist-form-container">
+        <form id="changelist-form" method="post" novalidate="">
+          {% csrf_token %}
+
+          <div class="results">
+            <table id="result_list">
+              <thead>
+                <tr>
+                  <th scope="col" class="action-checkbox-column">
+                    <div class="text">
+                      <span
+                        ><input
+                          type="checkbox"
+                          id="action-toggle"
+                          control-id="ControlID-5"
+                      /></span>
+                    </div>
+                    <div class="clear"></div>
+                  </th>
+                  <th scope="col" class="sortable column-description">
+                    <div class="text">Description</div>
+                    <div class="clear"></div>
+                  </th>
+                  <th
+                    scope="col"
+                    class="sortable column-start_date sorted ascending"
+                  >
+                    <div class="sortoptions"></div>
+
+                    <div class="text">Start date</div>
+                    <div class="clear"></div>
+                  </th>
+                  <th
+                    scope="col"
+                    class="sortable column-end_date sorted descending"
+                  >
+                    <div class="text">End date</div>
+                    <div class="clear"></div>
+                  </th>
+                  <th scope="col" class="sortable column-google_link">
+                    <div class="text">Google link</div>
+                    <div class="clear"></div>
+                  </th>
+                  <th scope="col" class="sortable column-google_link">
+                    <div class="text">In Database</div>
+                    <div class="clear"></div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for event in events %}
+                <tr>
+                  <td class="action-checkbox">
+                    <input
+                      type="checkbox"
+                      name="_selected_action"
+                      value="726"
+                      class="action-select"
+                      control-id="ControlID-6"
+                    />
+                  </td>
+                  <th class="field-description">
+                    <a href="{{event.htmlLink}}">{{event.summary}} </a>
+                  </th>
+                  <td class="field-start_date nowrap">
+                    {% if event.start.dateTime %} {{event.start.dateTime}} {% else %} {{event.start.date}} {% endif %}
+                  </td>
+                  <td class="field-end_date nowrap">
+                    {% if event.end.dateTime %} {{event.end.dateTime}} {% else %} {{event.end.date}} {% endif %}
+
+                  </td>
+                  <td class="field-google_link">
+                    <a href="{{event.htmlLink}}">Google Link</a>
+                  </td>
+                  <td class="field-in_database">
+                    {% if event.id in event_google_ids %} True {% else %} False
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <br class="clear" />
+</div>
+{% endblock %}

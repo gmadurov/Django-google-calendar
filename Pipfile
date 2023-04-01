@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+all = """sh -c \"
+    python manage.py makemigrations \
+    && python manage.py migrate \
+    && python manage.py runserver \
+\"
+"""
+runserver = """sh -c \"python manage.py runserver \""""
+makemigrations = """sh -c \"python manage.py makemigrations \""""
+migrate = """sh -c \"python manage.py migrate \""""
+createsuperuser = """sh -c \"python manage.py createsuperuser \""""
+collectstatic = """sh -c \"python manage.py collectstatic --noinput \""""
+launch = """sh -c \"gunicorn google_events.wsgi --log-file - \""""
+
+[packages]
+django = "*"
+google-api-python-client = "*"
+gunicorn = "*"
+oauth2client = "*"
+whitenoise = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

@@ -1,0 +1,4 @@
+.env 
+*.lock
+staticfiles/*
+db.sqlite3
